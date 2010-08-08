@@ -80,6 +80,7 @@ class Symbols {
          "companionClass" -> symbolLink(sym.companionClass),
          "companionModule" -> symbolLink(sym.companionModule),
          "privateWithin" -> symbolLink(sym.privateWithin),
+         "superClass" -> symbolLink(sym.superClass),
          "typeName" -> sym.tpe.toString,
          "type" -> typeBlock(chooseTemplate("symbol","type",xhtml), sym.tpe)
        )
