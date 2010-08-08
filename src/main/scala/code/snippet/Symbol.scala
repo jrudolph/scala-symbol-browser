@@ -1,5 +1,7 @@
 package code.snippet
 
+import scala.{Symbol => _}
+
 import net.liftweb
 import liftweb._
 import liftweb.util._
@@ -28,9 +30,18 @@ object Compiler {
     res
   }
 
+  import compiler.{Symbol, NoSymbol}
+  def safeOwner(sym: compiler.Symbol) = 
+    if (sym == NoSymbol) NoSymbol else sym.owner
+
+  def symbolKey(sym: compiler.Symbol): String = sym match {
+    case NoSymbol => ""
+    case _ => sym.kindString+sym.fullName
+  }
+
   val knownSymbols = new scala.collection.mutable.HashMap[String, compiler.Symbol]
   def sym2name(sym: compiler.Symbol): String = {
-    val name = sym.toString+sym.fullName
+    val name = symbolKey(sym)
     //if (knownSymbols.contains(name) && knownSymbols(name) != sym)
     //  throw new RuntimeException("Double symbol "+name)
 
@@ -77,7 +88,7 @@ class Symbols {
          "name" -> sym.name.toString,
          "fullName" -> sym.fullName,
          "stable" -> sym.isStable,
-         "owner" -> symbolLink(if (sym == NoSymbol) NoSymbol else sym.owner),
+         "owner" -> symbolLink(Compiler.safeOwner(sym)),
          "companionClass" -> symbolLink(sym.companionClass),
          "companionModule" -> symbolLink(sym.companionModule),
          "privateWithin" -> symbolLink(sym.privateWithin),
