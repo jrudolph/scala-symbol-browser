@@ -1,17 +1,24 @@
 <lift:surround with="default" at="content">
   <lift:symbols.info>
+    <h1><symbol:fullName/></h1>
     <table>
       <tr><th>Name</th><td><symbol:name/></td></tr>
-      <tr><th>Full Name</th><td><symbol:fullName/></td></tr>
       <tr><th>Owner</th><td><symbol:owner/></td></tr>
+      <tr><th>CompanionClass</th><td><symbol:companionClass/></td></tr>
+      <tr><th>CompanionModule</th><td><symbol:companionModule/></td></tr>
+      <tr><th>Private within</th><td><symbol:privateWithin/></td></tr>
       <tr><th>Type</th><td><symbol:typeName/></td></tr>
     </table>
+    <h2>Type: <symbol:typeName/></h2>
     <symbol:type>
-      <type:members>
-        <table>
-          <tr><td><member:name/></td></tr>
-        </table>
-      </type:members>
+      <table>
+        <type:members>
+          <tr>
+            <td><member:type/></td>
+            <td><member:name/></td>
+          </tr>
+        </type:members>
+      </table>
     </symbol:type>
   </lift:symbols.info>
 </lift:surround>

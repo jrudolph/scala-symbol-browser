@@ -37,8 +37,8 @@ object Compiler {
     knownSymbols(name) = sym
     name      
   }
-  def name2sym(name: String): compiler.Symbol = {
-    knownSymbols(name)
+  def name2sym(name: String): Option[compiler.Symbol] = {
+    knownSymbols.get(name)
   }
 }
 
@@ -54,13 +54,16 @@ class Symbols {
   def test = <div>{S.param("name")}</div>
 
   def info(xhtml: NodeSeq) = {
-    infoBlock(xhtml, S.param("name").map(Compiler.name2sym).openOr(definitions.RootClass))
+    infoBlock(xhtml, S.param("name").flatMap(Compiler.name2sym).openOr(definitions.RootClass))
   }
 
   def typeBlock(xhtml: NodeSeq, tpe: Type): NodeSeq = {
     def members(xhtml: NodeSeq): NodeSeq =
-      tpe.members.filter(isValidSymbol).flatMap( sym =>
-        bind("member", xhtml, "name" -> symbolLink(sym))
+      tpe.members.filter(isValidSymbol).flatMap( sym =>        
+        bind("member", xhtml, 
+             "name" -> symbolLink(sym),
+             "type" -> sym.kindString
+           )
       )
 
     bind("type", xhtml,
@@ -74,6 +77,9 @@ class Symbols {
          "name" -> sym.name.toString,
          "fullName" -> sym.fullName,
          "owner" -> symbolLink(if (sym == NoSymbol) NoSymbol else sym.owner),
+         "companionClass" -> symbolLink(sym.companionClass),
+         "companionModule" -> symbolLink(sym.companionModule),
+         "privateWithin" -> symbolLink(sym.privateWithin),
          "typeName" -> sym.tpe.toString,
          "type" -> typeBlock(chooseTemplate("symbol","type",xhtml), sym.tpe)
        )
