@@ -76,6 +76,7 @@ class Symbols {
     bind("symbol", xhtml,
          "name" -> sym.name.toString,
          "fullName" -> sym.fullName,
+         "stable" -> sym.isStable,
          "owner" -> symbolLink(if (sym == NoSymbol) NoSymbol else sym.owner),
          "companionClass" -> symbolLink(sym.companionClass),
          "companionModule" -> symbolLink(sym.companionModule),
