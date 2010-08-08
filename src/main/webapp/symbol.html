@@ -1,3 +1,17 @@
 <lift:surround with="default" at="content">
-  <lift:symbols.test />
+  <lift:symbols.info>
+    <table>
+      <tr><th>Name</th><td><symbol:name/></td></tr>
+      <tr><th>Full Name</th><td><symbol:fullName/></td></tr>
+      <tr><th>Owner</th><td><symbol:owner/></td></tr>
+      <tr><th>Type</th><td><symbol:typeName/></td></tr>
+    </table>
+    <symbol:type>
+      <type:members>
+        <table>
+          <tr><td><member:name/></td></tr>
+        </table>
+      </type:members>
+    </symbol:type>
+  </lift:symbols.info>
 </lift:surround>
