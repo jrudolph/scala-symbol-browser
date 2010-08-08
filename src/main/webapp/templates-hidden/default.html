@@ -2,9 +2,8 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    
-		<title>code:app:0.1-SNAPSHOT</title>
+    <meta name="keywords" content="" />    
+		<title>Scala Symbol Browser</title>
     <lift:CSS.blueprint />
     <lift:CSS.fancyType />
     <script id="jquery" src="/classpath/jquery.js" type="text/javascript"/>
@@ -21,7 +20,10 @@
 	padding:0;
 	border-bottom:1px solid #ccc;
 }
-	 
+
+alt a {
+   text-decoration: none;
+}
 
 .sidebar ul li {
 	margin:0;
@@ -56,19 +58,10 @@
   <body>
     <div class="container">
       <div class="column span-12 last" style="text-align: right">
-        <h1 class="alt">app<img alt="" id="ajax-loader" style="display:none; margin-bottom: 0px; margin-left: 5px" src="/images/ajax-loader.gif"/></h1>
+        <h2 class="alt"><a href="/symbol">Scala Symbol Browser</a><img alt="" id="ajax-loader" style="display:none; margin-bottom: 0px; margin-left: 5px" src="/images/ajax-loader.gif"/></h2>
       </div>
 
       <hr/>
-
-      <div class="column span-6 colborder sidebar">
-        <hr class="space" />
-        <lift:Menu.builder />	
-        <div>
-          <lift:Msgs showAll="true"/>
-          <hr class="space" />
-        </div>
-      </div>
 
       <div class="column span-17 last">
         <lift:bind name="content" />
@@ -77,8 +70,8 @@
       <hr />
       <div class="column span-23 last" style="text-align: center">
         <h4 class="alt">
-          <a href="http://www.liftweb.net"><i>Lift</i></a> 
-	        is Copyright 2007-2010 WorldWide Conferencing, LLC.  Distributed under an Apache 2.0 License.</h4>
+          <a href="http://github.com/jrudolph/scala-symbol-browser"><i>Symbol Browser</i></a> 
+	        Copyright 2010 Johannes Rudolph</h4>
       </div>
       
     </div>
