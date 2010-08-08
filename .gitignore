@@ -19,7 +19,7 @@ derby.log
 
 # building
 target
-build
+/build
 null
 tmp*
 dist
